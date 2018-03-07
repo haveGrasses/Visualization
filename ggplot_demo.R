@@ -16,13 +16,14 @@ plot_data$ratings[plot_data$ratings >= 7.0 & plot_data$ratings < 8.0 ] <- 'avera
 plot_data$ratings[plot_data$ratings >= 6.0 & plot_data$ratings < 7.0 ] <- 'low'
 plot_data$ratings[plot_data$ratings < 6.0 ] <- 'poor'
 plot_data$ratings <- factor(plot_data$ratings, 
-                            levels = c('high', 'good', 'average', 'low', 'poor'))
+                            levels = c('great', 'good', 'average', 'low', 'poor'))
 # visulization
 
 # 各档评分的多少
 ggplot(plot_data,aes(x=ratings, ))+
   geom_bar()
 # 可以看出，average档（7.0—8.0）的评分比较多，其次是good（8.0-9.0）
-# 特别好high（>9.0）和特别差（<6.0）都比较少,近似于正态分布
+# 特别好great（>9.0）和特别差（<6.0）都比较少,近似于正态分布
 
 # 评论人数与评分的关系
+# 待续
