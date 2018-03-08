@@ -26,7 +26,7 @@ ggplot(plot_data,aes(x=rating_level, ))+
 # 特别好great（>9.0）和特别差（<6.0）都比较少,近似于正态分布
 
 # 评论人数与评分的关系
-# 待续
+# 初步可视化分析
 ggplot(plot_data, aes(x = comments, y = ratings, colour = ratings))+
   geom_point()+
   xlim(c(0, 1500))
@@ -49,15 +49,9 @@ ggplot(plot_data, aes(x = comments, y = ratings, size = ratings, colour = rating
   scale_color_brewer(palette = 'Set1')+
   geom_smooth(method = lm)
 
-ggplot(plot_data, aes(x = comments, y = ratings, size = ratings, colour = rating_level))+
-  geom_point(alpha = .1)+
-  xlim(c(0, 1500))+
-  scale_size_area()+
-  scale_color_brewer(palette = 'Set1')+
-  geom_text(aes(y = ratings+0.2, label=name))
-# 相关性分析
+# 统计上相关性分析
 cor(plot_data$ratings, plot_data$comments)
 cor.test(plot_data$ratings, plot_data$comments)
-# 结论：
-data_mt <- as.matrix(plot_data[,1:2])
-heatmap(data_mt)
+# 结论：几乎没有相关性
+
+
