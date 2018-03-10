@@ -3,7 +3,7 @@ library(ggplot2)
 setwd('F:\\R\\R case\\visualization')
 # load data
 book_info <- read.csv('book_douban.csv',  header=F)
-colnames = c('name', 'ratings', 'comment_num', 'price', 'pub', 'url')
+colnames = c('name', 'ratings', 'comment_num', 'price', 'author', 'pub', 'url')
 book_info_df <- as.data.frame(book_info, col.names=colnames)
 plot_data <- data.frame(book_info_df[1], as.vector(unlist(book_info_df[2])), 
                         as.vector(unlist(book_info_df[3])), as.vector(unlist(book_info_df[4])))
@@ -36,7 +36,7 @@ ggplot(plot_data, aes(x = comments, y = ratings, colour = ratings))+
 # 评论数和评分高低似乎没有明显的联系
 # 气泡图
 ggplot(plot_data, aes(x = comments, y = ratings, size = price, colour = rating_level))+
-  geom_point(alpha = .1)+
+  geom_point(alpha = .5)+
   xlim(c(0, 1500))+
   scale_size_area()+
   scale_color_brewer(palette = 'Set1')
@@ -44,10 +44,10 @@ ggplot(plot_data, aes(x = comments, y = ratings, size = price, colour = rating_l
 
 # 评分高的大多价钱比较高
 ggplot(plot_data, aes(x = ratings, y = price, size = price, colour = rating_level))+
-  geom_point(alpha = .1)+
-  ylim(c(0, 700))+
+  geom_point(alpha = .5)+
+  ylim(c(0, 150))+
   scale_size_area()+
-  scale_color_brewer(palette = 'Set2')+
+  scale_color_brewer(palette = 'Set1')+
   geom_smooth(method = 'lm')
 
 # 评分和评论数量统计上相关性分析
@@ -58,4 +58,5 @@ cor.test(plot_data$ratings, plot_data$comments)
 # # 评分和价钱统计上相关性分析
 cor(plot_data$ratings, plot_data$price)
 cor.test(plot_data$ratings, plot_data$price)
-# 结论：评分和价钱正相关——验证了一个古老的哲理：一分价钱一分货
+# 结论：评分和价钱有一定的正相关，特别是在评分在8-9之间的书中，验证了一个古老的哲理：一分价钱一分货
+# 但是，也存在质量与价格不对等的情况，这种现象在评分低的书中表现得尤为明显。
